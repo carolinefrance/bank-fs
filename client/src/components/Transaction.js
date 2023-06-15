@@ -1,4 +1,4 @@
-// Transaction.js based on Deposit.js
+// Transaction.js based on Deposit.js, has Deposit and Withdraw functionality
 import React, { useState, useContext } from "react";
 import { UserContext } from "../App";
 import Card from "react-bootstrap/Card";
