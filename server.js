@@ -4,7 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config.js');
 const routes = require('./routes.js');
 require('dotenv').config();
-
+// const MongoClient = require('mongodb').MongoClient; <-- do I need this?
 connectDB();
 
 app.use(express.static('public'));
@@ -53,7 +53,7 @@ app.use(function (req, res, next) {
     res.status(500).send('500: Internal Server Error');
   });  
 
-/* To run server, node index.js
+/* To run server locally, node index.js
     To test, http://localhost:3000/account/create/peter/peter@mit/secret
     Browser output is the JSON object
     {"name":"peter","email":"peter@mit","password":"secret"}
