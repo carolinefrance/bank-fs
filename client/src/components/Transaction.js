@@ -1,14 +1,14 @@
-// Deposit.js
+// Transaction.js based on Deposit.js
 import React, { useState, useContext } from "react";
-// import { UserContext } from "../App"; <-- error, never used
+import { UserContext } from "../App";
 import Card from "react-bootstrap/Card";
 import "./styles/Card.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
+export function Transaction({loggedInUser, updateUser, updateUserBalance}) {
   const [amount, setAmount] = useState("");
-  //const ctx = useContext(UserContext); <-- error, never used
+  // const ctx = useContext(UserContext); <-- error, never used
   const [status, setStatus] = useState("");
 
   const handleDeposit = () => {
@@ -16,7 +16,15 @@ export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
     const updatedUser = { ...loggedInUser, balance: loggedInUser.balance + Number(amount) };
     updateUser(updatedUser);
     updateUserBalance(updatedUser);
-    showSuccess();
+    showDepositSuccess();
+  };
+
+  const handleWithdraw = () => {
+    if (!validate(amount, "amount")) return;
+    const updatedUser = { ...loggedInUser, balance: loggedInUser.balance - Number(amount) };
+    updateUser(updatedUser);
+    updateUserBalance(updatedUser);
+    showWithdrawSuccess();
   };
 
   function reset() {
@@ -26,8 +34,13 @@ export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
     }, 4000);
   }
 
-  function showSuccess() {
+  function showDepositSuccess() {
     setStatus(`Your deposit of $${amount} was successful!`)
+    reset();
+  }
+
+  function showWithdrawSuccess() {
+    setStatus(`Your withdrawl of $${amount} was successful!`)
     reset();
   }
 
@@ -59,7 +72,7 @@ export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
           alt="card image cap"
         />
         <Card.Body>
-          <Card.Title>Deposit</Card.Title>
+          <Card.Title>Transaction</Card.Title>
           <Card.Text>Your current balance is ${loggedInUser.balance}</Card.Text>
           <Form>
             <input
@@ -72,13 +85,11 @@ export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
             />
             <br />
             {status && <p>{status}</p>}
-            <Button
-              type="button"
-              className="btn btn-light"
-              onClick={handleDeposit}
-              disabled={status !== "" || amount === ""}
-            >
-              Deposit
+            <Button type="button" className="btn btn-light" onClick={handleDeposit} disabled={status !== "" || amount === ""}>
+            Deposit
+            </Button>
+            <Button type="button" className="btn btn-light" onClick={handleWithdraw} disabled={status !== "" || amount === ""}>
+            Withdraw
             </Button>
           </Form>
         </Card.Body>
@@ -87,4 +98,4 @@ export function Deposit({loggedInUser, updateUser, updateUserBalance}) {
   );
 }
 
-export default Deposit;
+export default Transaction;

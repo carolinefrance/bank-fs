@@ -12,10 +12,11 @@ import { CreateAccount } from './components/CreateAccount';
 import { Login } from './components/Login';
 import { Deposit } from './components/Deposit';
 import { Withdraw } from './components/Withdraw';
+import { Transaction } from './components/Transaction';
 import { AllData } from './components/AllData';
 
 // React hooks
-import { useEffect, useState, createContext } from 'react';
+import { useState, createContext } from 'react'; // deleted useEffect, unused error
 
 // Parent style for main area of app: centers subcomponents
 import './App.css';
@@ -55,6 +56,7 @@ function App() {
             <Route path="/login" element={<Login updateUser={updateUser} users={users}/>} />
             <Route path="/deposit" element={<Deposit updateUser={updateUser} loggedInUser = {loggedInUser} updateUserBalance={updateUserBalance} />} />
             <Route path="/withdraw" element={<Withdraw updateUser={updateUser} loggedInUser = {loggedInUser} updateUserBalance={updateUserBalance} />} />
+            <Route path="/transaction" element={<Transaction updateUser={updateUser} loggedInUser = {loggedInUser} updateUserBalance={updateUserBalance} />} />
             <Route path="/all-data" element={<AllData users= {users} />} />
           </Routes>
           <br />

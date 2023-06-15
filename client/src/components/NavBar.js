@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../App';
-import { NavbarItem } from './NavbarItem';
+// import { NavbarItem } from './NavbarItem'; <-- error, never used
 import { NavLink, useLocation } from 'react-router-dom';
 import './styles/NavBar.css';
 
 export function NavBar ({loggedInUser}) {
     const ctx = useContext(UserContext);
-    const location = useLocation();
+    // const location = useLocation(); <-- error, never used
 
-    function setActiveTab(tab) {
+    /* function setActiveTab(tab) {
         ctx.activeTab = tab;
-    }
+    }       <-- error, never used */
 
     return (
       <div>
@@ -40,6 +40,9 @@ export function NavBar ({loggedInUser}) {
                   </li>
                   <li className="nav-item">
                     <NavLink className="nav-link" activeClassName="active" to="/withdraw">Withdraw</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" activeClassName="active" to="/transaction">Transaction</NavLink>
                   </li>
                   <li className="nav-item">
                     <NavLink className="nav-link" activeClassName="active" to="/all-data">All Data</NavLink>

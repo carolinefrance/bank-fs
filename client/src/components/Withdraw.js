@@ -12,13 +12,6 @@ export function Withdraw({loggedInUser, updateUser, updateUserBalance}) {
   const handleWithdraw = () => {
     if (!validate(amount, "amount")) return;
 
-/*
-    for (let i = 0; i < ctx.users.length; i++) {
-      if (ctx.users[i].email === loggedInUser.email) {
-        ctx.users[i].balance = loggedInUser.balance - Number(amount);
-      }
-    }
-*/
     const updatedUser = { ...loggedInUser, balance: loggedInUser.balance - Number(amount) };
     updateUser(updatedUser);
     updateUserBalance(updatedUser);
