@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
     res.status(404).send('404: Page not found');
   });
   
-  // Handle internal server error 500
+// Handle internal server error 500
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('500: Internal Server Error');
