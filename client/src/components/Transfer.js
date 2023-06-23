@@ -85,7 +85,7 @@ export function Transfer({loggedInUser, setLoggedInUser, updateUser, updateUserB
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card className="white" style={{ width: "35rem" }}>
         <Card.Img variant="top"
-          src={`${process.env.PUBLIC_URL}/images/image-Withdraw.jpg`} alt="card image cap"
+          src={`${process.env.PUBLIC_URL}/images/image-transfer.jpeg`} alt="card image cap"
         />
         <Card.Body>
           <Card.Title>Transfer</Card.Title>

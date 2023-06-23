@@ -11,7 +11,7 @@ import { Home } from './components/Home';
 import { CreateAccount } from './components/CreateAccount';
 import { Login } from './components/Login';
 import { Transfer } from './components/Transfer';
-import { Withdraw } from './components/Withdraw';
+import { Resources } from './components/Resources';
 import { Transaction } from './components/Transaction';
 import { AllData } from './components/AllData';
 // React hooks
@@ -134,6 +134,7 @@ useEffect(() => {
             <Route path="/login" element={<Login updateUser={updateUser} users={users}/>} />
             <Route path="/transaction" element={<Transaction loggedInUser = {loggedInUser} setLoggedInUser ={setLoggedInUser} />} />
             <Route path="/transfer" element={<Transfer updateUser={updateUser} loggedInUser = {loggedInUser} setLoggedInUser = {setLoggedInUser} updateUserBalance={updateUserBalance} />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/all-data" element={<AllData />} />
           </Routes>
           <br />

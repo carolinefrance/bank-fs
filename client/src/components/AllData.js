@@ -33,7 +33,7 @@ export function AllData() {
     <Card className="white" style={{ width: '60rem' }}>
     {/*<Card.Img variant="top" src={`${process.env.PUBLIC_URL}/images/image-data.jpg`} alt="card image cap" />*/}
       <Card.Body>
-        <Card.Title>All Data</Card.Title>
+        <Card.Title>Customer and Employee Accounts</Card.Title>
         <br />
         <Table striped bordered hover>
           <thead>

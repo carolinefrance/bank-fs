@@ -22,11 +22,8 @@ export function Home() {
     <Container>
         <Row>
           <Col>
-
-            
-
             <Card className='card-wide'>
-              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/images/image-bank-animated.gif`} alt="card image cap" />
+              <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/images/image-banner-night.gif`} alt="card image cap" />
               <Card.Body>
               <Card.Title>UpstateBridge Nonprofit Bank: Your Path to Financial Security</Card.Title>
               <br/>

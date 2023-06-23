@@ -107,7 +107,7 @@ const handleWithdraw = async() => {
       <Card style={{ width: "35rem" }}>
         <Card.Img
           variant="top"
-          src={`${process.env.PUBLIC_URL}/images/image-deposit.jpg`}
+          src={`${process.env.PUBLIC_URL}/images/image-transaction.jpg`}
           alt="card image cap"
         />
         <Card.Body>
