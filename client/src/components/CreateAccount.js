@@ -1,18 +1,48 @@
 // CreateAccount.js
-import React, {useState, useContext} from "react";
-import { UserContext } from '../App';
+/*
+Client ID
+104078153668-cqkljommcb3a2jmb13irs35mmptk5unb.apps.googleusercontent.com
+
+Client secret
+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
+*/
+
+import React, {useState, useEffect, useContext} from "react";
+import { UserContext, baseUrl } from '../App';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "./styles/Card.css";
+import LoginButton from './LoginButton';
 
-export function CreateAccount({addUser}) {
+export function CreateAccount({addUser, setLoggedInUser}) {
   const [show, setShow] = useState(true);
   const [status, setStatus] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [users, setUsers] = useState([]);
   const ctx = useContext(UserContext);
-  console.log("ctx.users", ctx.users);
+  useEffect(() => {
+    fetch(`${baseUrl}/users`)
+      .then(res => res.json())
+      .then(users => setUsers(users))
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    if (window.google) {
+      window.google.accounts.id.initialize({
+        client_id: "104078153668-cqkljommcb3a2jmb13irs35mmptk5unb.apps.googleusercontent.com",
+        callback: signUpWithGoogle,
+      });
+      window.google.accounts.id.renderButton(document.getElementById("googleButton"), {
+        theme: "outline",
+        text: "sign_up",
+        shape: "rectangular",
+      });
+      
+    }
+  }, []);
 
   function validate(field, label) {
     if (!field) {
@@ -28,14 +58,26 @@ export function CreateAccount({addUser}) {
     return true;
   }
 
-  function handleCreate() {
+  async function handleCreate() {
     console.log(name, email, password);
     if (!validate(name, "name")) return;
     if (!validate(email, "email")) return;
     if (!validate(password, "password")) return;
+  
+    const error = await addUser({ name, email, password });
+    if (error) {
+      console.log("Create account component: ", error);
+      setStatus(error.message);
+    }
+    else {
+      setShow(false); // shows else block
+    }
+  }
 
-    addUser({ name, email, password, balance: 100 });
-    setShow(false); // shows else block
+  async function signUpWithGoogle(response) {
+    console.log("response", response);
+    setShow(false);
+    setLoggedInUser({name: "Guest", email: "Guest e-mail", _id: "Guest id"});
   }
 
   function clearForm() {
@@ -67,10 +109,11 @@ export function CreateAccount({addUser}) {
 
             {status && <p>{status}</p>}
 
-            <button type="button" className="btn btn-light"
-              onClick={handleCreate}>
-              Submit
+            <button type="button" className="btn btn-light" onClick={handleCreate}>
+              Sign up with email
             </button>
+
+            <LoginButton buttonText="Sign up with Google" handleSubmit={addUser} />
           </>
         ) : (
           <>
@@ -88,6 +131,7 @@ export function CreateAccount({addUser}) {
             <button className="btn btn-light" onClick={clearForm}>
               Add another account
             </button>
+            
           </>
         )}
       </Card.Body>

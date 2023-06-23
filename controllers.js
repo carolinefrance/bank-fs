@@ -11,15 +11,13 @@ async function createUser (req, res) {
         email: email
     });
     if (userExists) {
-        res.status(400).send('User already exists, please log in');
+        res.status(400).json({message: 'User already exists, please log in'});
         return;
     }
 
-    const newUser = await User.create({
-        name: name, 
-        email: email, 
-        password: password
-    });
+    const newUser = await User.create(
+        req.body
+    );
     console.log(newUser);
     res.json(newUser);
     }
@@ -38,11 +36,11 @@ async function login (req, res) {
         });
         console.log("Log in user", userExists);
         if (!userExists) {
-            res.status(400).send('User does not exist, please create an account.');
+            res.status(400).json({message: 'User e-mail does not exist, please create an account.'});
             return;
         };
         if (userExists.password !== password) {
-            res.status(400).send('Incorrect password, please try again.');
+            res.status(400).json({message: 'Incorrect password, please try again.'});
             return;
         };
     res.json(userExists);
@@ -94,4 +92,25 @@ async function transaction (req, res) {
     }
 };
 
-module.exports = {createUser, login, getAllUsers, deleteUser, transaction};
+// transfer
+async function transfer (req, res) {
+    const transferAmount = req.body.transferAmount;
+    const senderBalance = req.body.senderBalance;
+    const recipientBalance = req.body.recipientBalance;
+
+    try {
+    const updatedSender = await User.findByIdAndUpdate(req.params.senderId, {
+        balance: senderBalance - transferAmount
+    });
+    const updatedRecipient = await User.findByIdAndUpdate(req.params.recipientId, {
+        balance: recipientBalance + transferAmount
+    });
+    res.json({message: "Transfer was successful."});
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).send('500: Internal Server Error');
+    }
+};
+
+module.exports = {createUser, login, getAllUsers, deleteUser, transaction, transfer};

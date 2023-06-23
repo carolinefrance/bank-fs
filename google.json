@@ -1,0 +1,10 @@
+{"web":{
+    "client_id":"104078153668-cqkljommcb3a2jmb13irs35mmptk5unb.apps.googleusercontent.com",
+    "project_id":"bank-fs-390315",
+    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+    "token_uri":"https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret":"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",
+    "javascript_origins":["http://localhost","http://localhost:3000"]
+    }
+}

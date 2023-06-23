@@ -5,26 +5,65 @@ import Card from "react-bootstrap/Card";
 import "./styles/Card.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { baseUrl } from "../App";
 
-export function Transaction({loggedInUser, updateUser, updateUserBalance}) {
+export function Transaction({loggedInUser, setLoggedInUser}) {
   const [amount, setAmount] = useState("");
   // const ctx = useContext(UserContext); <-- error, never used
   const [status, setStatus] = useState("");
 
-  const handleDeposit = () => {
+  const handleDeposit = async() => {
     if (!validate(amount, "amount")) return;
-    const updatedUser = { ...loggedInUser, balance: loggedInUser.balance + Number(amount) };
-    updateUser(updatedUser);
-    updateUserBalance(updatedUser);
+    /* FE VERSION --- const updatedUser = { ...loggedInUser, balance: loggedInUser.balance + Number(amount) }; */
+    try {
+    const response = await fetch(`${baseUrl}/users/${loggedInUser._id}`, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({balance: loggedInUser.balance + Number(amount)}),
+    });
+    await response.json();
+    setLoggedInUser({ ...loggedInUser, balance: loggedInUser.balance + Number(amount) });
+    /* FE VERSION --- updateUser(updatedUser);
+    updateUserBalance(updatedUser); */
     showDepositSuccess();
+    }
+    catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleWithdraw = () => {
+const handleWithdraw = async() => {
     if (!validate(amount, "amount")) return;
-    const updatedUser = { ...loggedInUser, balance: loggedInUser.balance - Number(amount) };
+    if (Number(amount) > loggedInUser.balance) {
+      setStatus("Error: You cannot withdraw more than your current balance.");
+      reset();
+      return;
+    }
+    /* FE VERSION ---- const updatedUser = { ...loggedInUser, balance: loggedInUser.balance - Number(amount) };
     updateUser(updatedUser);
     updateUserBalance(updatedUser);
-    showWithdrawSuccess();
+    showWithdrawSuccess();*/
+    try {
+      const response = await fetch(`${baseUrl}/users/${loggedInUser._id}`, {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({balance: loggedInUser.balance - Number(amount)}),
+      });
+      await response.json();
+      setLoggedInUser({ ...loggedInUser, balance: loggedInUser.balance - Number(amount) });
+      /* FE VERSION --- updateUser(updatedUser);
+      updateUserBalance(updatedUser); */
+      showWithdrawSuccess();
+      }
+      catch (err) {
+        console.log(err);
+      }
   };
 
   function reset() {
@@ -73,7 +112,7 @@ export function Transaction({loggedInUser, updateUser, updateUserBalance}) {
         />
         <Card.Body>
           <Card.Title>Transaction</Card.Title>
-          <Card.Text>Your current balance is ${loggedInUser.balance}</Card.Text>
+          <Card.Text>Your current balance is ${loggedInUser?.balance}</Card.Text>
           <Form>
             <input
               type="text"

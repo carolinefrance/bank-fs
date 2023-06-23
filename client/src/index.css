@@ -8,11 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url(../public/images/image-site-background.jpeg);
+  background-image: url(../public/images/image-night-city.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
 
-  background-color: #cccccc;
+  background-color: #000000;
     /* gradient background
     background-image: radial-gradient(
       rgba(255, 255, 255, 0.8),

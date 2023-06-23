@@ -5,7 +5,8 @@ const UserSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     balance: {type: Number, default: 100},
-    isEmployee: {type: Boolean, default: false}
+    isEmployee: {type: Boolean, default: false},
+    isGoogle: {type: Boolean, default: false}
 });
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

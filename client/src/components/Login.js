@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom';
 //            DESIGN: STYLE + BOOTSTRAP COMPONENTS
 import { Card } from 'react-bootstrap';
 import "./styles/Card.css";
+import { GoogleLogin } from 'react-google-login';
+import LoginButton from './LoginButton'; // Import the LoginButton component
+import { initializeApp } from "firebase/app"; // Firebase SDK
 
 // COMPONENT  Login
 // PURPOSE    Renders the login form.
@@ -38,15 +41,16 @@ export function Login({updateUser, users}) {
 
   // FUNCTION: handleLogin
   // PURPOSE:  Validates the user's email and password. If either field is empty, the user is prompted to enter a value. It finds the user from the users array. If the user is found, the user is logged in and navigated to the home page. If the user is not found, the user is navigated to the create account page.
-  function handleLogin() {
+  async function handleLogin() {
     if (!validate(email, "email")) return;
     if (!validate(password, "password")) return;
-    const user = users.find((user) => user.email === email && user.password === password);
-    if (user) {
-      updateUser(user);
-      navigate("/");
-    } else {
-      navigate("/create-account");
+    const error = await updateUser({ email, password });
+    if (error) {
+      console.log("Login component: ", error);
+      setStatus(error.message);
+    }
+    else {
+      navigate("/transaction");
     }
   }
 
@@ -70,11 +74,19 @@ export function Login({updateUser, users}) {
 
             <button type="submit" className="btn btn-light"
               onClick={handleLogin}>
-              Login
+              Login with Email
             </button>
+            <LoginButton buttonText="Login with Google" handleSubmit={updateUser}/>
           </>
       </Card.Body>
     </Card>
     </div>
   );
 }
+
+/* old Google login button
+            <button type="submit" className="btn btn-light"
+              onClick={handleLogin}>
+              Login with Google
+            </button>
+*/
