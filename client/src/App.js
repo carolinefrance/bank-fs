@@ -25,7 +25,8 @@ import './App.css';
 /* Syntax notes: path names are not case sensitive, should be lowercase and hyphenated, and do not include a trailing slash. React component names are in CamelCase. Although my subcomponents are nested in a components folder, do not write "/components/subcomponent-name" because each subcomponent-name acts like a variable, not a full path. */
 
 export const UserContext = createContext(null);
-export const baseUrl = "http://localhost:8080/api";
+// export const baseUrl = "http://localhost:8080/api"; <-- dev
+export const baseUrl = "/api";
 // What the App function does is it creates an array of users and a logged in user. It also creates functions to update the user array and the logged in user. It then renders the NavBar component and the Routes component. The NavBar component is rendered on every page; it needs to be placed inside BrowserRouter to work. The Routes component displays one selected subcomponent ("web page") at a time.
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
