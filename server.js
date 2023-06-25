@@ -12,15 +12,17 @@ require('dotenv').config();
 
 connectDB();
 
-//app.use(express.static('public')); //<-- DEV MODE, npm run dev
+app.use(express.static('public')); //<-- DEV MODE, npm run dev
 //app.use(express.static(path.join(__dirname, 'client/build'))); // <-- PRODUCTION MODE, npm start 
 app.use(cors());
 app.use(express.json());
 app.use("/api", routes); // handles all requests (POST, GET) to /api
-/* comment out next 3 lines for DEV MODE */
-/*app.get('*', (req, res) => {
+/* comment out next 3 lines for DEV MODE, use for PRODUCTION */
+/*
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});*/
+});
+*/
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
