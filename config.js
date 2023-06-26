@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 async function connectDB() {
     // full MONGODB_URI is in .env file
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Connected to DB");  
+    console.log("SUCCESS: Connected to DB");
 }
 // Export connectDB function; can be accessed by other modules
 module.exports = connectDB;
