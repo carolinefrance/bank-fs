@@ -1,39 +1,43 @@
 # Bank-Full-Stack-App
-Note: This is NOT complete; I'm in the process of coding, so please ignore this README file if you stumble across this app. The text below is what I intend to do over the next two weeks.
-* * *
-The original code for this exercise was created by faculty for MiT xPro's Professional Certificate in Coding: Full Stack Development with MERN course (August 2022 cohort). I modified the appearance of the app with CSS and Bootstrap. The previous front-end only bank repository was refactored into a full-stack MERN app.
+The original code for this full-stack MERN app was created by faculty for MiT xPro's Professional Certificate in Coding: Full Stack Development with MERN course (August 2022 cohort). This respository is the backend of the app, which connects to the Express web server and MongoDB (the name of the front-end repository is bank-fs-fe). I modified the appearance of the app with CSS, Bootstrap, PhotoShop, and Adobe Stock images. I combined the Deposit/Withdraw components into a Transactions component. I created a Transactions page, so a user can transfer money from their account into another user's account. I created a Resources page to address the needs of my ideal users, who are low-income individuals in crisis. I created an employee user type; employees can be added through Postman. I added more fields and delete functionality to the AllData page, so employees can delete a customer.
 ##### Caroline J. France
 Last updated on 14 June 2023
 ### Project Description
-This full-stack MERN banking app is modified from the course's Module 27 exercise: Tiered Bad Bank, and it is a capstone project. Viewers will see a single-page create React app that is an interface for a bank. The previous banking app (bank repo is available in my profile) focused on the front-end and simulated a backend. In contrast, this app incorporates the front-end, middleware, and back-end. Specifically, React is connected to an Express, Node, and MongoDB. Upon loading, the user needs to create an account and log in before being able to access the transaction page. Only users who are employees can view the all data/account information page.
+This full-stack MERN banking app is modified from the course's Module 27 exercise: Tiered Bad Bank, and it is a capstone project. Viewers will see a single-page create React app that is an interface for a bank. The previous banking app (bank repo is available in my profile) focused on the front-end and simulated a backend. In contrast, this app incorporates the front end, middleware, and back end. Specifically, React is connected to an Express/Node web server, and MongoDB. Upon loading, the user needs to create an account and log in before being able to access the transaction page. Only users who are employees can view the all data/account information page. Users can test employee user functionality when they login with e-mail: username = Employee, password = password123.
 ### Refactored from Previous Version
-* Upon logging in, the user's e-mail appears in the top-right corner
+* Upon logging in with e-mail or Google, the user's name appears in the top-right corner
 * Log-in now incorporates OAuth2, so users can log in with their Google account
 * Banking balance persists across log-ins
 * Data are passed to a Mongo database instead of being written to a local file
+* Data persists after a user logs out and logs back in
 Additional features include the following:
-* Random account number generator for new account
 * User role: employee, client
-* Persistent user profile update
+* Employees can see more user fields and delete a user from AllData
+* User profile updates are persistent
+* Users can transfer money from their account to another account
+* Users can access external resources through the Resources component
 ### Future Improvements
 Here are some redesign/reconfigure ideas for this project:
 * Add stricter ES6 validation for form fields.
-* Add options: currency, language, and dark mode.
-* Make the design more responsive.
+* Add options: currency, language,
+* Use useEffect and buttons to switch between dark and light mode stylesheets.
+* Add more employee functionality to edit user data
+* Add an employee form, so employees can add resources to the Resources component
 * Redesign front-end layout (Tailwind, Midjourney)
+* Integrate an external financial API
 * Integrate an AI chatbot
 
 ### View the Live App
 * View the front-end only version's live build on Netlify at [https://carolinefrancebankingapp.netlify.app/](https://carolinefrancebankingapp.netlify.app/)
-* View the current version's live build ... (coming soon)
+* View the current version's live build (https://bank-fs-fe.onrender.com/)
 
 ### Locally Run the App
-Download all files in the Bank-React-App repository into a directory on your computer. Open the directory in your code editor. You should have Node version 16 or higher installed since Firebase used in authentication for the login page is incompatible with earlier versions.
+Download all files in both the bank-fs-fe repository and bank-fs repository into a directory on your computer. Open the directory in your code editor. You should have Node version 16 or higher installed. 
 
 In the terminal / command prompt, run the following commands:
 
-Open the directory with the app files in your code editor.
-* cd/bank
+Open the directory with the front end app files in your code editor.
+* cd/bank-fs-fe
 
 Install the following dependencies:
 *	npm install bootstrap
@@ -50,6 +54,16 @@ Install the following dependencies:
 
 *	npm start
 > app is now visible on your local computer in the browser at [http://localhost:3000/](http://localhost:3000/)
+
+Open the directory with the front end app files in your code editor.
+* cd/bank-fs
+
+Install the following dependencies:
+*	npm install express, mongoose
+> enables connection to the Express web server and mongo database
+
+To run:
+* npm start
 
 ### Technologies Used
 # Create React App
