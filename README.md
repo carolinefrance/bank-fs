@@ -1,4 +1,4 @@
-# Bank-Full-Stack-App
+# Bank-Full-Stack-App - Back End
 The original code for this full-stack MERN app was created by faculty for MiT xPro's Professional Certificate in Coding: Full Stack Development with MERN course (August 2022 cohort). This respository is the backend of the app, which connects to the Express web server and MongoDB (the name of the front-end repository is bank-fs-fe). I modified the appearance of the app with CSS, Bootstrap, PhotoShop, and Adobe Stock images. I combined the Deposit/Withdraw components into a Transactions component. I created a Transactions page, so a user can transfer money from their account into another user's account. I created a Resources page to address the needs of my ideal users, who are low-income individuals in crisis. I created an employee user type; employees can be added through Postman. I added more fields and delete functionality to the AllData page, so employees can delete a customer.
 ##### Caroline J. France
 Last updated on 14 June 2023
